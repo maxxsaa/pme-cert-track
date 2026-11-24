@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rendez-vous noté</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1MMCLDQDBZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-1MMCLDQDBZ");
+    const params = new URLSearchParams(location.search);
+    gtag("event", "rendez_vous_accepte", {
+      lead_id: params.get("id") || "vide",
+      certificat: params.get("certificat") || "vide",
+      etape: params.get("etape") || "vide",
+      persona: params.get("persona") || "vide"
+    });
+  </script>
+  <style>
+    body { font-family: Georgia, serif; margin: 4rem auto; max-width: 32rem; color: #1c1c1c; }
+  </style>
+</head>
+<body>
+  <img src="logo.png" alt="PME Cert" width="88" height="88">
+  <h1>Rendez-vous noté</h1>
+  <p>L’événement a été envoyé à Google Analytics. Cette page sert à la démonstration. Elle n’est pas dans le message.</p>
+</body>
+</html>

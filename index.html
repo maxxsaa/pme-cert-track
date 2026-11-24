@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PME Cert</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1MMCLDQDBZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-1MMCLDQDBZ");
+
+    const params = new URLSearchParams(location.search);
+    const detail = {
+      lead_id: params.get("id") || "vide",
+      certificat: params.get("certificat") || "vide",
+      etape: params.get("etape") || "vide",
+      persona: params.get("persona") || "vide"
+    };
+    const destination = "https://pme-cert.be/contact/";
+    function go() {
+      location.replace(destination);
+    }
+    gtag("event", "clic", Object.assign({}, detail, {event_callback: go}));
+    setTimeout(go, 1200);
+  </script>
+  <style>
+    body { font-family: Georgia, serif; margin: 4rem auto; max-width: 28rem; color: #1c1c1c; text-align: center; }
+    a { display: inline-block; margin-top: 1.5rem; background: #106024; color: #fff; text-decoration: none; padding: 0.8rem 1.1rem; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <img src="logo.png" alt="PME Cert" width="88" height="88">
+  <p>Ouverture de la page de contact de PME Cert.</p>
+  <a href="https://pme-cert.be/contact/">Accéder au site de PME Cert</a>
+</body>
+</html>
