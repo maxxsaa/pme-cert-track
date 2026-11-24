@@ -16,14 +16,42 @@
       lead_id: params.get("id") || "vide",
       certificat: params.get("certificat") || "vide",
       etape: params.get("etape") || "vide",
-      persona: params.get("persona") || "vide"
+      persona: params.get("persona") || "vide",
+      societe: params.get("societe") || ""
     };
     const destination = "https://pme-cert.be/contact/";
+
+    /* Pont Excel (gratuit) : e-mail → flux « Noter les retours »
+       Sujet PMECERT-CLIC + nom de société → dernier_evenement · clic */
+    function notifyExcel() {
+      const subject = "PMECERT-CLIC " + detail.lead_id + (detail.societe ? " " + detail.societe : "");
+      const body = {
+        _subject: subject,
+        _template: "table",
+        lead_id: detail.lead_id,
+        societe: detail.societe,
+        etape: detail.etape,
+        certificat: detail.certificat,
+        persona: detail.persona,
+        message: "clic hop GA4 → registre"
+      };
+      try {
+        fetch("https://formsubmit.co/ajax/max.salomon@ulb.be", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(body),
+          keepalive: true
+        }).catch(function () {});
+      } catch (e) {}
+    }
+
     function go() {
       location.replace(destination);
     }
-    gtag("event", "clic", Object.assign({}, detail, {event_callback: go}));
-    setTimeout(go, 1200);
+
+    notifyExcel();
+    gtag("event", "clic", Object.assign({}, detail, { event_callback: go }));
+    setTimeout(go, 1400);
   </script>
   <style>
     body { font-family: Georgia, serif; margin: 4rem auto; max-width: 28rem; color: #1c1c1c; text-align: center; }
